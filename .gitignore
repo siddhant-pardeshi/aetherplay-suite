@@ -21,3 +21,4 @@ video/check_frame.png
 
 # local build logs
 build_*.log
+.downloads/

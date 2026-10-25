@@ -1,3 +1,0 @@
-d4c3b1a6a88e0fd7eee670c6dc72aafb0d5602977c023051c7cbcc3d0e8da698 *AetherPlay-Lab-0.1.0-debug.apk
-1c77828fd1372088f854b95bda02515cee434cff32602ef464fffad95a304ad1 *AetherPlay-Space-0.1.0-debug.apk
-659421737576c54c6965de1c70286375dece0f2df2014903bb974352623dcb39 *AetherPlay-Walkthrough-v0.1.0.mp4
