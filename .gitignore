@@ -22,3 +22,8 @@ video/check_frame.png
 # local build logs
 build_*.log
 .downloads/
+
+# signing identities — never commit
+keystore.properties
+*.keystore
+*.jks

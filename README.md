@@ -4,7 +4,7 @@
 
 <img src="assets/readme/typeline.svg" width="620" alt="search · refine · preview · commit · undo" />
 
-[![version](https://img.shields.io/badge/version-0.1.0-65E3BE?style=flat-square)](https://github.com/siddhant-pardeshi/aetherplay-suite/releases)
+[![version](https://img.shields.io/badge/version-0.1.1-65E3BE?style=flat-square)](https://github.com/siddhant-pardeshi/aetherplay-suite/releases)
 [![android](https://img.shields.io/badge/Android-6.0%20%E2%86%92%2017-3DDC84?style=flat-square&logo=android&logoColor=white)](docs/COMPATIBILITY.md)
 [![kotlin](https://img.shields.io/badge/Kotlin-2.4.21-7F52FF?style=flat-square&logo=kotlin&logoColor=white)](build.gradle.kts)
 [![compose](https://img.shields.io/badge/Jetpack%20Compose-2026.09-4285F4?style=flat-square)](gradle/libs.versions.toml)
@@ -72,6 +72,29 @@ Host sessions and keep saves apart.
 </table>
 
 <img src="assets/readme/divider.svg" width="100%" alt="" />
+
+## ✦ The real apps, really running
+
+Captured on an Android 16 emulator against the paired debug build — the same session that produced the [walkthrough video](https://github.com/siddhant-pardeshi/aetherplay-suite/releases/tag/v0.1.0). More in [docs/screenshots](docs/screenshots/).
+
+<table>
+<tr>
+<td><img src="docs/screenshots/space-session-running.png" width="100%" alt="AetherPlay Space with a running session"></td>
+<td><img src="docs/screenshots/crystal-sprint.png" width="100%" alt="Crystal Sprint gameplay"></td>
+</tr>
+<tr>
+<td align="center"><sub>Space — session running, honest stop control</sub></td>
+<td align="center"><sub>Crystal Sprint — the cooperative training game</sub></td>
+</tr>
+<tr>
+<td><img src="docs/screenshots/lab-search-results.png" width="100%" alt="Lab search results"></td>
+<td><img src="docs/screenshots/lab-write-preview.png" width="100%" alt="Lab write preview sheet"></td>
+</tr>
+<tr>
+<td align="center"><sub>Lab — live search results with real values</sub></td>
+<td align="center"><sub>Lab — previewed write: old → new before commit</sub></td>
+</tr>
+</table>
 
 ## ✦ How an experiment feels
 

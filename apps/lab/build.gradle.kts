@@ -1,7 +1,17 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+}
+
+// Optional release signing: present only when keystore.properties exists at the
+// repo root (see keystore.properties.sample). The Lab<->Space bridge requires
+// both apps to share one signing identity; paired debug builds already do.
+val releaseKeystore = rootProject.file("keystore.properties")
+val releaseProps = Properties().apply {
+    if (releaseKeystore.exists()) releaseKeystore.inputStream().use { load(it) }
 }
 
 android {
@@ -16,6 +26,17 @@ android {
         versionName = "0.1.1"
     }
 
+    if (releaseKeystore.exists()) {
+        signingConfigs {
+            create("release") {
+                storeFile = rootProject.file(releaseProps.getProperty("storeFile"))
+                storePassword = releaseProps.getProperty("storePassword")
+                keyAlias = releaseProps.getProperty("keyAlias")
+                keyPassword = releaseProps.getProperty("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = true
@@ -23,6 +44,9 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            if (releaseKeystore.exists()) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
     }
 
