@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AetherPlay Space</string>
+    <string name="bridge_permission_description">Allows the paired AetherPlay Lab app to connect to experiment sessions hosted by AetherPlay Space. Granted automatically only to apps signed with the same key.</string>
+</resources>
