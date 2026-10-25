@@ -1,0 +1,23 @@
+*.iml
+.gradle/
+build/
+local.properties
+.idea/
+.DS_Store
+captures/
+.externalNativeBuild/
+.cxx/
+.kotlin/
+*.apk.idsig
+*.hprof
+
+# media pipeline artifacts (reproduce via video/*.py / .ps1; final video ships via Releases)
+video/frames/
+video/recordings/
+video/voice/
+video/live/
+video/*.mp4
+video/check_frame.png
+
+# local build logs
+build_*.log
