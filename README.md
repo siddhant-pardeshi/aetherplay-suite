@@ -16,7 +16,7 @@
 
 **AetherPlay Lab** searches a live game session, refines results down to one address, previews every change before it lands, journals each write, and undoes or freezes it. **AetherPlay Space** hosts the session, the training game, and your named spaces with separate save data — and pairs with Lab over a signature-guarded bridge.
 
-[Hosted interactive tour](https://siddhant-pardeshi.github.io/aetherplay-suite/) · [Video walkthrough](https://github.com/siddhant-pardeshi/aetherplay-suite/releases/tag/v0.1.0) · [Quickstart](docs/QUICKSTART.md) · [First-session tutorial](docs/TUTORIAL_01_FIRST_SESSION.md)
+[Hosted interactive tour](https://siddhant-pardeshi.github.io/aetherplay-suite/) · [Full walkthrough video](https://github.com/siddhant-pardeshi/aetherplay-suite/releases/tag/v0.1.0) · [Step-by-step video (0.1.1)](https://github.com/siddhant-pardeshi/aetherplay-suite/releases/tag/v0.1.1) · [Quickstart](docs/QUICKSTART.md) · [First-session tutorial](docs/TUTORIAL_01_FIRST_SESSION.md)
 
 </div>
 
