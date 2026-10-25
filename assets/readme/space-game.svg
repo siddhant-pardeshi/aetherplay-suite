@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="300" viewBox="0 0 560 300" role="img" aria-label="Crystal Sprint training game inside AetherPlay Space">
+  <defs>
+    <linearGradient id="cg1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#65E3BE"/>
+      <stop offset="100%" stop-color="#3EC9C4"/>
+    </linearGradient>
+    <linearGradient id="cg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#B5A1FF"/>
+      <stop offset="100%" stop-color="#7F9BFF"/>
+    </linearGradient>
+    <radialGradient id="orb" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#B5A1FF"/>
+      <stop offset="100%" stop-color="#7F9BFF"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="560" height="300" rx="20" fill="#07080C"/>
+  <rect x="1" y="1" width="558" height="298" rx="19" fill="none" stroke="#2A3444" stroke-width="1.5"/>
+
+  <!-- faint grid -->
+  <g stroke="#141A24" stroke-width="1">
+    <line x1="0" y1="70" x2="560" y2="70"/><line x1="0" y1="140" x2="560" y2="140"/><line x1="0" y1="210" x2="560" y2="210"/>
+    <line x1="80" y1="60" x2="80" y2="280"/><line x1="160" y1="60" x2="160" y2="280"/><line x1="240" y1="60" x2="240" y2="280"/>
+    <line x1="320" y1="60" x2="320" y2="280"/><line x1="400" y1="60" x2="400" y2="280"/><line x1="480" y1="60" x2="480" y2="280"/>
+  </g>
+
+  <!-- HUD -->
+  <text x="24" y="36" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="16" fill="#F2F5FA">CRYSTALS</text>
+  <text x="118" y="37" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="18" fill="#65E3BE">42</text>
+  <rect x="300" y="26" width="220" height="8" rx="4" fill="#1D2532"/>
+  <rect x="302" y="28" width="150" height="4" rx="2" fill="url(#cg1)">
+    <animate attributeName="width" values="150; 90; 170; 120; 150" dur="9s" repeatCount="indefinite"/>
+  </rect>
+  <text x="536" y="37" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#A8B3C4">ENERGY</text>
+
+  <!-- falling crystals -->
+  <g>
+    <path d="M120 0 L134 14 L120 28 L106 14 Z" fill="url(#cg1)">
+      <animate attributeName="transform" type="translate" values="0 60; 0 250; 0 60" dur="4.6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="1; 1; 0" keyTimes="0; 0.85; 1" dur="4.6s" repeatCount="indefinite"/>
+    </path>
+    <path d="M300 0 L313 13 L300 26 L287 13 Z" fill="url(#cg2)">
+      <animate attributeName="transform" type="translate" values="0 60; 0 250; 0 60" dur="5.8s" repeatCount="indefinite" begin="1.2s"/>
+      <animate attributeName="opacity" values="1; 1; 0" keyTimes="0; 0.85; 1" dur="5.8s" repeatCount="indefinite" begin="1.2s"/>
+    </path>
+    <path d="M430 0 L441 11 L430 22 L419 11 Z" fill="url(#cg1)">
+      <animate attributeName="transform" type="translate" values="0 60; 0 250; 0 60" dur="5.1s" repeatCount="indefinite" begin="2.4s"/>
+      <animate attributeName="opacity" values="1; 1; 0" keyTimes="0; 0.85; 1" dur="5.1s" repeatCount="indefinite" begin="2.4s"/>
+    </path>
+    <path d="M210 0 L219 9 L210 18 L201 9 Z" fill="url(#cg2)">
+      <animate attributeName="transform" type="translate" values="0 60; 0 250; 0 60" dur="4.2s" repeatCount="indefinite" begin="0.6s"/>
+      <animate attributeName="opacity" values="1; 1; 0" keyTimes="0; 0.85; 1" dur="4.2s" repeatCount="indefinite" begin="0.6s"/>
+    </path>
+  </g>
+
+  <!-- player orb sweeping -->
+  <g>
+    <circle cy="258" r="26" fill="url(#orb)" opacity="0.22">
+      <animate attributeName="cx" values="150; 380; 210; 150" dur="7s" repeatCount="indefinite"/>
+    </circle>
+    <circle cy="258" r="14" fill="url(#orb)">
+      <animate attributeName="cx" values="150; 380; 210; 150" dur="7s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="-4" cy="-4" r="5" fill="#F2F5FA" opacity="0.5">
+      <animate attributeName="cx" values="146; 376; 206; 146" dur="7s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <text x="280" y="292" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#5A6577">Crystal Sprint — the cooperative training game, hosted inside Space</text>
+</svg>

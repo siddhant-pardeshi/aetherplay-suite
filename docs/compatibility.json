@@ -1,0 +1,67 @@
+{
+  "schema": "aetherplay.compatibility/1.0",
+  "suite": {
+    "name": "AetherPlay Suite",
+    "versionName": "0.1.0",
+    "versionCode": 1,
+    "apps": {
+      "lab": {
+        "package": "io.github.siddhantpardeshi.aetherplay.lab",
+        "role": "instrument: search/refine/read/write/undo/freeze UI"
+      },
+      "space": {
+        "package": "io.github.siddhantpardeshi.aetherplay.space",
+        "role": "stage: named spaces, session foreground service, Crystal Sprint training game, bridge service"
+      }
+    }
+  },
+  "statuses": ["shipped", "experimental", "planned", "not-planned"],
+  "capabilities": [
+    { "capability": "paired-build-install", "status": "shipped", "notes": "Both apps built from one tree; debug pair works out of the box (shared debug keystore)." },
+    { "capability": "bridge-aidl", "status": "shipped", "notes": "IBridgeBroker, protocol 1.0 (major.minor), signature-level permission io.github.siddhantpardeshi.aetherplay.BRIDGE. Protocol negotiation unit-tested. Not device-tested over real Binder." },
+    { "capability": "search-modes", "status": "shipped", "notes": "exact/range/unknown; unit-tested incl. cancellation, result cap, bad queries." },
+    { "capability": "value-types", "status": "shipped", "notes": "I8,U8,I16,U16,I32,U32,I64,U64,F32,F64; little-endian; codec unit-tested." },
+    { "capability": "alignment-regions", "status": "shipped", "notes": "Alignment 1/2/4; region selection. Unit-tested." },
+    { "capability": "refine-ops", "status": "shipped", "notes": "exact/changed/unchanged/increased/decreased. Unit-tested." },
+    { "capability": "read-write-preview-commit", "status": "shipped", "notes": "Commit re-validates; per-item outcomes; bounded writable field set; playfield read-only." },
+    { "capability": "undo", "status": "shipped", "notes": "Last write only, identity re-check, refuses when value is no longer yours or session changed." },
+    { "capability": "freeze", "status": "shipped", "notes": "Re-applies every 300 ms while the session runs; not a hard lock; all freezes stop with the session; Stop all in Lab History." },
+    { "capability": "result-paging", "status": "shipped", "notes": "Cap 100,000 candidates; 100 per page; changed markers." },
+    { "capability": "saved-experiments", "status": "shipped", "notes": "Search recipes as local JSON in Lab; export/share; one-tap rerun." },
+    { "capability": "named-spaces", "status": "shipped", "notes": "Create/rename/delete with confirmation; separate Crystal Sprint saves per space in app-private storage; storage usage shown." },
+    { "capability": "crystal-sprint", "status": "shipped", "notes": "Original, offline, cooperative training game inside Space." },
+    { "capability": "themes", "status": "shipped", "notes": "Aurora Precision: dark #0B0D12 default, OLED, light; reduce-motion switch in both apps; light theme less polished." },
+    { "capability": "third-party-guest-runtime", "status": "planned", "notes": "The experimental milestone. Not started; feasibility documented but NOT proven; spike pending. Central unresolved item." },
+    { "capability": "scripts-lua", "status": "not-planned", "notes": "Not present in 0.1.0; no committed timeline." },
+    { "capability": "pattern-text-pointer-search", "status": "not-planned", "notes": "Not present in 0.1.0; no committed timeline." },
+    { "capability": "floating-overlay", "status": "not-planned", "notes": "Not present in 0.1.0; no committed timeline." },
+    { "capability": "root-mode", "status": "not-planned", "notes": "Not present in 0.1.0; no committed timeline." },
+    { "capability": "anti-cheat-evasion", "status": "not-planned", "notes": "Out of scope forever." },
+    { "capability": "online-competitive-games", "status": "not-planned", "notes": "AetherPlay does not and will not target online, competitive, or server-authoritative games." },
+    { "capability": "room-database", "status": "not-planned", "notes": "Simple JSON persistence is the chosen design." },
+    { "capability": "cloud-accounts-telemetry", "status": "not-planned", "notes": "Fully local; neither app requests the INTERNET permission." },
+    { "capability": "on-device-validation", "status": "planned", "notes": "Physical validation pending, including iQOO Neo 6. Not device-tested." }
+  ],
+  "platform": {
+    "android": {
+      "minSdk": 23,
+      "targetSdk": 37,
+      "compileSdk": 37,
+      "deviceTested": false,
+      "statement": "Not tested on any physical Android version - not device-tested."
+    },
+    "abi": {
+      "nativeCode": false,
+      "abis": ["arm64-v8a", "armeabi-v7a", "x86", "x86_64"],
+      "statement": "Pure Kotlin/Compose; no native code; all ABIs run the same bytecode."
+    },
+    "pageSize16kb": {
+      "applicable": false,
+      "statement": "No native libraries, so 16 KB page size is not applicable; stated for completeness."
+    },
+    "buildPairing": {
+      "sameSigningKeyRequired": true,
+      "statement": "Lab and Space must be signed with the same key in any installed pair; mixed pairs fail the signature check by design."
+    }
+  }
+}

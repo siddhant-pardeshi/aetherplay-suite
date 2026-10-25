@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="300" viewBox="0 0 560 300" role="img" aria-label="Lab scanning a memory region, matches lighting up">
+  <rect width="560" height="300" rx="20" fill="#141923"/>
+  <rect x="1" y="1" width="558" height="298" rx="19" fill="none" stroke="#2A3444" stroke-width="1.5"/>
+
+  <text x="28" y="42" font-family="'Segoe UI', system-ui, sans-serif" font-size="16" font-weight="600" fill="#F2F5FA">Int32 · exact “42”</text>
+  <rect x="418" y="24" width="116" height="24" rx="12" fill="#65E3BE" fill-opacity="0.14" stroke="#65E3BE" stroke-opacity="0.5"/>
+  <text x="476" y="41" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" fill="#65E3BE">3 matches</text>
+
+  <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14">
+    <!-- memory rows -->
+    <g>
+      <text x="28" y="84" fill="#A8B3C4">0x7B000000   2A 00 00 00</text>
+      <rect x="28" y="66" width="260" height="26" rx="6" fill="#65E3BE" fill-opacity="0">
+        <animate attributeName="fill-opacity" values="0; 0.16; 0.16; 0" keyTimes="0; 0.15; 0.7; 1" dur="4s" repeatCount="indefinite"/>
+      </rect>
+      <circle cx="306" cy="78" r="4" fill="#65E3BE" opacity="0">
+        <animate attributeName="opacity" values="0; 1; 1; 0" keyTimes="0; 0.15; 0.7; 1" dur="4s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+    <text x="28" y="114" fill="#5A6577">0x7B000004   00 00 2F 42</text>
+    <text x="28" y="144" fill="#5A6577">0x7B000008   15 81 1C 00</text>
+    <g>
+      <text x="28" y="174" fill="#A8B3C4">0x7B100078   2A 00 00 00</text>
+      <rect x="28" y="156" width="260" height="26" rx="6" fill="#65E3BE" fill-opacity="0">
+        <animate attributeName="fill-opacity" values="0; 0; 0.16; 0.16; 0" keyTimes="0; 0.35; 0.5; 0.85; 1" dur="4s" repeatCount="indefinite"/>
+      </rect>
+      <circle cx="306" cy="168" r="4" fill="#65E3BE" opacity="0">
+        <animate attributeName="opacity" values="0; 0; 1; 1; 0" keyTimes="0; 0.35; 0.5; 0.85; 1" dur="4s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+    <text x="28" y="204" fill="#5A6577">0x7B10007C   54 00 00 00</text>
+    <text x="28" y="234" fill="#5A6577">0x7B100080   00 00 04 00</text>
+    <g>
+      <text x="28" y="264" fill="#A8B3C4">0x7B100084   2A 00 00 00</text>
+      <rect x="28" y="246" width="260" height="26" rx="6" fill="#65E3BE" fill-opacity="0">
+        <animate attributeName="fill-opacity" values="0; 0; 0.16; 0.16; 0" keyTimes="0; 0.6; 0.72; 0.9; 1" dur="4s" repeatCount="indefinite"/>
+      </rect>
+      <circle cx="306" cy="258" r="4" fill="#65E3BE" opacity="0">
+        <animate attributeName="opacity" values="0; 0; 1; 1; 0" keyTimes="0; 0.6; 0.72; 0.9; 1" dur="4s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+  </g>
+
+  <!-- sweep bar -->
+  <rect x="16" y="0" width="3" height="0" rx="1.5" fill="#65E3BE" fill-opacity="0.9">
+    <animate attributeName="y" values="56; 236; 56" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="height" values="20; 20; 20" dur="4s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- refine hint -->
+  <rect x="368" y="150" width="168" height="120" rx="14" fill="#1D2532"/>
+  <text x="452" y="180" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="12" fill="#A8B3C4">refine → increased</text>
+  <text x="452" y="204" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" fill="#65E3BE">837 → 12</text>
+  <text x="452" y="228" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="12" fill="#A8B3C4">refine → exact “43”</text>
+  <text x="452" y="252" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" fill="#65E3BE">12 → 1</text>
+</svg>

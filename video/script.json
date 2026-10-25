@@ -1,0 +1,71 @@
+{
+  "title": "AetherPlay Suite — Full Walkthrough",
+  "voice": "Microsoft Zira Desktop, pitch +40%, rate -8% (soft young feminine tone)",
+  "segments": [
+    {
+      "id": "s01_intro",
+      "text": "Hi! Welcome to AetherPlay — a beautiful little laboratory for understanding how games work. This is the story of two apps that work together: AetherPlay Lab, and AetherPlay Space.",
+      "slide": "s01"
+    },
+    {
+      "id": "s02_pair",
+      "text": "Space is the stage. It keeps your named spaces with separate save data, and it hosts Crystal Sprint — a tiny, friendly training game built just for learning. Lab is the instrument. It connects to Space through a secure, signature-checked bridge, and lets you search, refine, preview, edit, undo, and freeze values — gently, and always reversibly.",
+      "slide": "s02"
+    },
+    {
+      "id": "s03_setup",
+      "text": "Setting up is easy. Build both apps from the source, or download the paired A-P-Ks from the releases page. Install Space and Lab together — they must be signed with the same key, and the debug builds handle that for you automatically.",
+      "slide": "s03"
+    },
+    {
+      "id": "s04_session",
+      "text": "Everything begins with a visible action in Space. Choose your space, tap Start Session, and Crystal Sprint comes alive. A friendly notification appears with an Open Game button and a Stop button — honest controls, always in reach.",
+      "slide": "s04"
+    },
+    {
+      "id": "s05_game",
+      "text": "Catch crystals by dragging the orb. Every crystal you catch changes a number inside the game — the crystal counter. Energy drains and refills. These little numbers are the secrets we are going to explore.",
+      "slide": "s05"
+    },
+    {
+      "id": "s06_search",
+      "text": "Now open Lab. It shakes hands with Space, checks that both apps are a matched pair, and shows you the live session. Type the number you see on screen — five, for example — choose Int thirty-two, exact search, and press Search. Lab scans the game's small, cooperative memory surface, and lights up every match.",
+      "slide": "s06"
+    },
+    {
+      "id": "s07_refine",
+      "text": "Here is the beautiful part. Go back to the game and catch one more crystal — six, now. In Lab, tap Refine, Increased. All the addresses that did not grow simply melt away. Refine again with the exact value, six… and you are left with one single address. That is the real one.",
+      "slide": "s07"
+    },
+    {
+      "id": "s08_write",
+      "text": "Tap the result and type ninety-nine. The preview shows old and new, side by side — nothing changes yet. Commit… and the game counter jumps to ninety-nine. Every write is journaled. Press Undo, and your old value comes right back.",
+      "slide": "s08"
+    },
+    {
+      "id": "s09_freeze",
+      "text": "You can also freeze a value. Lab gently re-applies it every three hundred milliseconds while the session lives. Watch the game try to change it — the number holds. And when you stop the session, every freeze stops. Always.",
+      "slide": "s09"
+    },
+    {
+      "id": "s10_spaces",
+      "text": "Spaces keep your experiments tidy. Create one for practice, one for wild ideas — each with its own save data. Deleting a space always tells you exactly what will be lost. No surprises.",
+      "slide": "s10"
+    },
+    {
+      "id": "s11_experiments",
+      "text": "Save your favorite searches as experiments, and run them again in one tap. Everything is wrapped in the Aurora Precision design language — deep graphite, electric mint, soft violet, calm motion, and a reduce-motion switch for when you want stillness.",
+      "slide": "s11"
+    },
+    {
+      "id": "s12_honest",
+      "text": "Now, the honest part. This build works with the training game only. Running other installed games inside a separate container — a true virtual space — is the suite's big open experiment, and it is not ready yet. AetherPlay will never pretend otherwise. And it will never touch online, competitive, or server-authoritative games. That is a promise.",
+      "slide": "s12"
+    },
+    {
+      "id": "s13_outro",
+      "text": "Everything you saw is real, local, and reproducible. Build it yourself, try the hosted tour in your browser, and read the honest documentation. AetherPlay — experiment beautifully. Bye bye!",
+      "slide": "s13"
+    }
+  ]
+}

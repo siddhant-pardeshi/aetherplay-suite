@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="70" viewBox="0 0 720 70" role="img" aria-label="Cycling AetherPlay workflow phrases">
+  <g font-family="'Segoe UI', system-ui, sans-serif" font-size="26" font-weight="600" text-anchor="middle">
+    <text x="360" y="44" fill="#65E3BE">search a value you can see
+      <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.03;0.22;0.25;1" dur="16s" repeatCount="indefinite"/>
+    </text>
+    <text x="360" y="44" fill="#B5A1FF">refine until one address remains
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.23;0.26;0.47;0.5;1" dur="16s" repeatCount="indefinite"/>
+    </text>
+    <text x="360" y="44" fill="#65E3BE">preview every change before it lands
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.48;0.51;0.72;0.75;1" dur="16s" repeatCount="indefinite"/>
+    </text>
+    <text x="360" y="44" fill="#B5A1FF">undo it — or freeze it — in one tap
+      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.73;0.76;0.97;1" dur="16s" repeatCount="indefinite"/>
+    </text>
+  </g>
+</svg>

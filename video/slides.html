@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:1920px; height:1080px; overflow:hidden; }
+  body {
+    font-family:'Segoe UI','SF Pro Display',system-ui,sans-serif;
+    background:#0B0D12; color:#F2F5FA; position:relative;
+  }
+  .aurora { position:absolute; inset:0;
+    background:
+      radial-gradient(900px 700px at 12% 8%, rgba(101,227,190,.20), transparent 60%),
+      radial-gradient(1000px 800px at 88% 20%, rgba(181,161,255,.18), transparent 60%),
+      radial-gradient(1100px 800px at 50% 110%, rgba(62,201,196,.14), transparent 60%);
+  }
+  .grid { position:absolute; inset:0; opacity:.5;
+    background-image:linear-gradient(rgba(42,52,68,.25) 1px, transparent 1px),
+                     linear-gradient(90deg, rgba(42,52,68,.25) 1px, transparent 1px);
+    background-size:64px 64px; }
+  .wrap { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:0 140px; }
+  .kicker { font-size:26px; letter-spacing:10px; color:#65E3BE; font-weight:600; margin-bottom:26px; }
+  .kicker.v { color:#B5A1FF; }
+  h1 { font-size:110px; font-weight:700; line-height:1.06; letter-spacing:-2px; }
+  h2 { font-size:76px; font-weight:700; line-height:1.1; letter-spacing:-1px; margin-bottom:30px; }
+  .sub { font-size:34px; color:#A8B3C4; line-height:1.5; max-width:1250px; margin-top:30px; }
+  .row { display:flex; gap:36px; margin-top:60px; }
+  .card { background:rgba(20,25,35,.85); border:1px solid rgba(42,52,68,.9); border-radius:24px; padding:40px 44px; flex:1; }
+  .card h3 { font-size:38px; margin-bottom:8px; }
+  .card .tag { font-size:22px; letter-spacing:4px; font-weight:600; margin-bottom:18px; }
+  .mint { color:#65E3BE; } .violet { color:#B5A1FF; }
+  .card ul { list-style:none; margin-top:16px; }
+  .card li { font-size:26px; color:#A8B3C4; line-height:1.75; padding-left:30px; position:relative; }
+  .card li::before { content:''; position:absolute; left:0; top:16px; width:10px; height:10px; border-radius:3px; background:currentColor; opacity:.9; }
+  .card.mintc li::before { background:#65E3BE; } .card.violetc li::before { background:#B5A1FF; }
+  .diamond { width:64px; height:64px; transform:rotate(45deg); border-radius:14px; margin-bottom:34px; }
+  .diamond.m { background:linear-gradient(135deg,#65E3BE,#3EC9C4); }
+  .diamond.v { background:linear-gradient(135deg,#B5A1FF,#7F9BFF); }
+  .steps { counter-reset:st; margin-top:50px; }
+  .steps div { font-size:32px; color:#D7DEE9; line-height:2.05; }
+  .steps div::before { counter-increment:st; content:counter(st); display:inline-block; width:52px; height:52px; line-height:52px; text-align:center;
+    border-radius:14px; background:linear-gradient(135deg,#65E3BE,#3EC9C4); color:#04241B; font-weight:700; margin-right:26px; font-size:26px; }
+  .code { background:#07080C; border:1px solid #2A3444; border-radius:16px; padding:34px 40px; font-family:Consolas,Menlo,monospace;
+    font-size:30px; color:#9FE8D4; line-height:1.9; margin-top:50px; width:fit-content; }
+  .code .p { color:#A8B3C4; } .code .c { color:#5A6577; }
+  .pill { display:inline-block; border-radius:999px; padding:10px 26px; font-size:24px; font-weight:600; letter-spacing:1px; margin-right:16px; }
+  .pill.ok { background:rgba(101,227,190,.14); color:#65E3BE; border:1px solid rgba(101,227,190,.45); }
+  .pill.warn { background:rgba(240,191,112,.12); color:#F0BF70; border:1px solid rgba(240,191,112,.45); }
+  .pill.no { background:rgba(255,133,133,.12); color:#FF8585; border:1px solid rgba(255,133,133,.45); }
+  .phone { width:400px; height:800px; border-radius:48px; border:2px solid #2A3444; background:#07080C; position:relative; overflow:hidden; flex-shrink:0; }
+  .phone .notch { width:150px; height:26px; background:#1D2532; border-radius:0 0 16px 16px; margin:0 auto; }
+  .phone .hud { display:flex; justify-content:space-between; padding:26px 30px; font-family:Consolas,monospace; font-size:24px; }
+  .phone .energy { height:10px; border-radius:6px; background:#1D2532; margin:6px 30px; overflow:hidden; }
+  .phone .energy i { display:block; height:100%; width:70%; background:linear-gradient(90deg,#65E3BE,#3EC9C4); }
+  .cr { position:absolute; width:44px; height:44px; transform:rotate(45deg); border-radius:9px; }
+  .note { position:absolute; bottom:52px; left:140px; right:140px; font-size:22px; color:#5A6577; letter-spacing:2px; }
+  .big { font-size:170px; font-weight:800; letter-spacing:-4px; }
+  .mono { font-family:Consolas,Menlo,monospace; }
+  .two { display:flex; gap:80px; align-items:center; }
+  .grow { flex:1; }
+  .footer-brand { position:absolute; top:64px; right:140px; font-size:24px; letter-spacing:8px; color:#A8B3C4; font-weight:600; }
+</style>
+</head>
+<body>
+<div class="aurora"></div><div class="grid"></div>
+<div class="footer-brand">AETHERPLAY</div>
+<div class="wrap" id="content"></div>
+<div class="note" id="note"></div>
+
+<script>
+const S = {};
+
+S.s01 = `
+<div>
+  <div class="kicker">A LOCAL GAME LABORATORY · OFFLINE · HONEST</div>
+  <h1>Experiment with<br>your games. <span style="color:#65E3BE">Beautifully.</span></h1>
+  <div class="sub">AetherPlay is an original Android suite for local game experimentation —<br>a precision <b style="color:#65E3BE">Lab</b> and a guest <b style="color:#B5A1FF">Space</b> that work together.</div>
+  <div class="row" style="margin-top:70px">
+    <span class="pill ok">SEARCH · REFINE · PREVIEW · WRITE · UNDO · FREEZE</span>
+    <span class="pill ok">NO ACCOUNT · NO NETWORK · NO NONSENSE</span>
+  </div>
+</div>`;
+
+S.s02 = `
+<div>
+  <h2>Two apps. <span class="violet">One workflow.</span></h2>
+  <div class="row">
+    <div class="card mintc">
+      <div class="diamond m"></div>
+      <div class="tag mint">AETHERPLAY LAB — THE INSTRUMENT</div>
+      <ul>
+        <li>Exact, range & unknown-value search, 10 types</li>
+        <li>Refine: changed / unchanged / increased / decreased</li>
+        <li>Previewed writes · journal · undo</li>
+        <li>Bounded freezes that stop with the session</li>
+        <li>Saved experiments, shareable as JSON</li>
+      </ul>
+    </div>
+    <div class="card violetc">
+      <div class="diamond v"></div>
+      <div class="tag violet">AETHERPLAY SPACE — THE STAGE</div>
+      <ul>
+        <li>Named spaces with separate save data</li>
+        <li>One-tap session start · honest status</li>
+        <li>Hosts Crystal Sprint, the training game</li>
+        <li>Signature-guarded bridge · protocol 1.0</li>
+        <li>Session notification with real stop control</li>
+      </ul>
+    </div>
+  </div>
+</div>`;
+
+S.s03 = `
+<div>
+  <div class="kicker">SETUP GUIDE</div>
+  <h2>Build the pair</h2>
+  <div class="code">
+<span class="p">$</span> git clone https://github.com/siddhant-pardeshi/aetherplay-suite.git<br>
+<span class="p">$</span> cd aetherplay-suite<br>
+<span class="p">$</span> ./gradlew :apps:lab:assembleDebug :apps:space:assembleDebug<br>
+<span class="p">$</span> adb install -r apps/space/build/outputs/apk/debug/space-debug.apk<br>
+<span class="p">$</span> adb install -r apps/lab/build/outputs/apk/debug/lab-debug.apk
+  </div>
+  <div class="sub">Or grab the paired APKs from GitHub Releases — every asset ships with SHA-256 checksums.<br>Both apps must be signed with the same key; paired debug builds already are.</div>
+</div>`;
+
+S.s04 = `
+<div class="two">
+  <div class="phone">
+    <div class="notch"></div>
+    <div style="padding:30px">
+      <div style="font-size:20px;letter-spacing:5px;color:#B5A1FF;font-weight:700">SESSION</div>
+      <div style="font-size:34px;font-weight:700;margin-top:12px;display:flex;align-items:center;gap:14px">
+        <span style="width:16px;height:16px;border-radius:50%;background:#65E3BE;display:inline-block"></span> Session running
+      </div>
+      <div style="margin-top:26px;background:#141923;border-radius:18px;padding:26px">
+        <div style="font-size:22px;color:#A8B3C4">GAME</div>
+        <div style="font-size:26px;font-weight:600;margin-top:6px">Crystal Sprint (training)</div>
+        <div style="font-size:22px;color:#A8B3C4;margin-top:18px">SPACE</div>
+        <div style="display:flex;gap:10px;margin-top:10px">
+          <span style="background:rgba(181,161,255,.18);color:#B5A1FF;border-radius:10px;padding:10px 18px;font-size:20px">Main space</span>
+          <span style="background:#1D2532;color:#A8B3C4;border-radius:10px;padding:10px 18px;font-size:20px">Practice</span>
+        </div>
+        <div style="margin-top:24px;background:linear-gradient(135deg,#65E3BE,#3EC9C4);color:#04241B;border-radius:14px;padding:18px;text-align:center;font-weight:700;font-size:24px">Start session</div>
+      </div>
+    </div>
+  </div>
+  <div class="grow">
+    <div class="kicker v">STEP 1 · A VISIBLE ACTION IN SPACE</div>
+    <h2>Sessions always start<br>where you can see them</h2>
+    <div class="sub">A foreground session begins with your tap — never from hiding.<br>
+    An honest notification appears: <b>Open game</b> · <b>Stop session</b>.<br><br>
+    The bridge wakes up, Crystal Sprint loads your save,<br>and AetherPlay Lab can now see the session.</div>
+  </div>
+</div>`;
+
+S.s05 = `
+<div class="two">
+  <div class="grow">
+    <div class="kicker">STEP 2 · PLAY THE TRAINING GAME</div>
+    <h2>Every crystal is<br>a number in memory</h2>
+    <div class="sub">Drag the orb. Catch crystals — the counter climbs.<br>
+    Energy drains as you move and refills as you catch.<br><br>
+    The game exposes a small, <b>cooperative memory surface</b>: 64 bytes of live state<br>
+    plus read-only playfield telemetry — with mirrors and decoys,<br>
+    so learning to refine feels like the real thing.</div>
+  </div>
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="hud"><span>CRYSTALS</span><span style="color:#F2F5FA;font-weight:700">5</span><span style="color:#A8B3C4">BEST 12</span></div>
+    <div class="energy"><i></i></div>
+    <div class="cr" style="left:70px; top:210px; background:linear-gradient(135deg,#65E3BE,#3EC9C4)"></div>
+    <div class="cr" style="left:300px; top:330px; background:linear-gradient(135deg,#B5A1FF,#7F9BFF)"></div>
+    <div class="cr" style="left:160px; top:450px; background:linear-gradient(135deg,#65E3BE,#3EC9C4)"></div>
+    <div class="cr" style="left:230px; top:250px; background:linear-gradient(135deg,#B5A1FF,#7F9BFF)"></div>
+    <div style="position:absolute; left:150px; bottom:70px; width:100px; height:100px; border-radius:50%;
+      background:radial-gradient(circle at 35% 30%, #B5A1FF, #7F9BFF); box-shadow:0 0 60px rgba(181,161,255,.5)"></div>
+    <div style="position:absolute; bottom:26px; width:100%; text-align:center; color:#5A6577; font-size:18px; letter-spacing:3px">DRAG TO MOVE</div>
+  </div>
+</div>`;
+
+S.s06 = `
+<div>
+  <div class="kicker">STEP 3 · SEARCH</div>
+  <h2>Search the value <span class="mint">you can see</span></h2>
+  <div class="row">
+    <div class="card" style="flex:0 0 760px">
+      <div class="tag mint">LAB · SEARCH COMPOSER</div>
+      <div style="display:flex;gap:14px;margin:10px 0 22px">
+        <span class="pill ok" style="border-color:rgba(101,227,190,.8)">I32</span>
+        <span class="pill" style="color:#A8B3C4;border:1px solid #2A3444;background:transparent">I64</span>
+        <span class="pill" style="color:#A8B3C4;border:1px solid #2A3444;background:transparent">F32</span>
+        <span class="pill" style="color:#A8B3C4;border:1px solid #2A3444;background:transparent">F64</span>
+      </div>
+      <div style="display:flex;gap:14px;margin-bottom:22px">
+        <span class="pill ok" style="border-color:rgba(101,227,190,.8)">Exact</span>
+        <span class="pill" style="color:#A8B3C4;border:1px solid #2A3444;background:transparent">Range</span>
+        <span class="pill" style="color:#A8B3C4;border:1px solid #2A3444;background:transparent">Unknown</span>
+      </div>
+      <div class="mono" style="font-size:30px;background:#07080C;border:1px solid #2A3444;border-radius:12px;padding:18px 24px;color:#F2F5FA">5</div>
+      <div style="margin-top:22px;background:linear-gradient(135deg,#65E3BE,#3EC9C4);color:#04241B;border-radius:14px;padding:18px;text-align:center;font-weight:700;font-size:26px;width:300px">Search</div>
+    </div>
+    <div class="card">
+      <div class="tag">WHAT LAB FOUND</div>
+      <div class="mono" style="font-size:27px;line-height:2.15;color:#D7DEE9">
+        0x7B000000 &nbsp; <span class="mint">42 → 5</span> &nbsp; game state · crystals<br>
+        0x7B100078 &nbsp; <span class="mint">5</span> &nbsp; playfield mirror<br>
+        0x7B100084 &nbsp; <span class="mint">5</span> &nbsp; lagging display copy<br>
+        <span style="color:#5A6577">…decoys on purpose — refining is the lesson</span>
+      </div>
+    </div>
+  </div>
+</div>`;
+
+S.s07 = `
+<div>
+  <div class="kicker">STEP 4 · REFINE</div>
+  <h2>Catch one more. <span class="mint">Watch the set collapse.</span></h2>
+  <div class="row" style="align-items:stretch">
+    <div class="card" style="flex:0 0 620px">
+      <div class="tag">REFINE OPERATIONS</div>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:12px">
+        <span class="pill ok">Increased</span><span class="pill" style="color:#A8B3C4;border:1px solid #2A3444;background:transparent">Decreased</span>
+        <span class="pill" style="color:#A8B3C4;border:1px solid #2A3444;background:transparent">Changed</span>
+        <span class="pill" style="color:#A8B3C4;border:1px solid #2A3444;background:transparent">Unchanged</span>
+        <span class="pill" style="color:#A8B3C4;border:1px solid #2A3444;background:transparent">Exact…</span>
+      </div>
+      <div class="sub" style="font-size:26px;margin-top:28px">Play between steps — the values that move are the ones that matter.</div>
+    </div>
+    <div class="card grow">
+      <div class="tag">THE FUNNEL</div>
+      <div class="mono" style="font-size:56px;line-height:1.9">
+        4 matches &nbsp;<span style="color:#5A6577">→</span>&nbsp; after Increased &nbsp;<span style="color:#5A6577">→</span>&nbsp; <span class="mint" style="font-weight:700">2</span><br>
+        after Exact “6” &nbsp;<span style="color:#5A6577">→</span>&nbsp; <span class="mint" style="font-weight:700;font-size:72px">1</span>
+        &nbsp;<span style="color:#5A6577;font-size:30px">← 0x7B000000 · the real one</span>
+      </div>
+    </div>
+  </div>
+</div>`;
+
+S.s08 = `
+<div>
+  <div class="kicker">STEP 5 · PREVIEW → COMMIT → UNDO</div>
+  <h2>Nothing changes until <span class="violet">you</span> say so</h2>
+  <div class="row">
+    <div class="card">
+      <div class="tag">PREVIEW</div>
+      <div class="mono" style="font-size:44px;margin-top:10px">6 &nbsp;<span class="mint">→</span>&nbsp; 99</div>
+      <div class="sub" style="font-size:24px;margin-top:14px">Old and new, side by side. The game is untouched.</div>
+    </div>
+    <div class="card">
+      <div class="tag">COMMIT</div>
+      <div style="font-size:44px;margin-top:10px">Crystal Sprint shows <span class="mint" style="font-weight:800">99</span></div>
+      <div class="sub" style="font-size:24px;margin-top:14px">Journaled with time, address, old and new value.</div>
+    </div>
+    <div class="card">
+      <div class="tag">UNDO</div>
+      <div style="font-size:44px;margin-top:10px">Back to <span class="mint" style="font-weight:800">6</span></div>
+      <div class="sub" style="font-size:24px;margin-top:14px">Identity-checked: undo only restores what is still yours.</div>
+    </div>
+  </div>
+</div>`;
+
+S.s09 = `
+<div>
+  <div class="kicker">STEP 6 · FREEZE</div>
+  <h2>Hold a value. <span class="mint">Gently.</span></h2>
+  <div class="row">
+    <div class="card" style="flex:0 0 800px">
+      <div class="tag">FREEZE</div>
+      <div class="mono" style="font-size:30px;line-height:2.1;color:#D7DEE9">
+        0x7B000000 &nbsp; crystals &nbsp; <span class="mint">held at 99</span><br>
+        <span style="color:#5A6577">re-applied every 300 ms · conservative by design</span>
+      </div>
+      <div style="margin-top:26px;display:inline-block;background:rgba(255,133,133,.12);border:1px solid rgba(255,133,133,.45);color:#FF8585;border-radius:999px;padding:12px 28px;font-weight:700;font-size:24px">STOP ALL FREEZES — always one tap away</div>
+    </div>
+    <div class="card grow">
+      <div class="tag">THE GUARANTEE</div>
+      <div class="sub" style="font-size:30px;margin-top:8px">Every freeze stops when the session stops.<br>
+      When the connection lease dies, when you press stop,<br>
+      when Space is dismissed — the game is <b>always</b> released.<br><br>
+      <span style="color:#5A6577">No busy-wait loops. No hidden background edits.</span></div>
+    </div>
+  </div>
+</div>`;
+
+S.s10 = `
+<div>
+  <div class="kicker v">SPACES</div>
+  <h2>Separate save data,<br>per named space</h2>
+  <div class="row">
+    <div class="card violetc">
+      <div class="tag violet">MAIN SPACE</div>
+      <div class="mono" style="font-size:26px;color:#A8B3C4;line-height:1.9">crystals 42 · best 88 · energy 76.5<br>saved moments ago</div>
+    </div>
+    <div class="card violetc">
+      <div class="tag violet">PRACTICE</div>
+      <div class="mono" style="font-size:26px;color:#A8B3C4;line-height:1.9">crystals 5 · best 12 · energy 100<br>its own little world</div>
+    </div>
+    <div class="card" style="border-color:rgba(255,133,133,.4)">
+      <div class="tag" style="color:#FF8585">DELETE — ALWAYS EXPLAINS</div>
+      <div class="sub" style="font-size:24px;margin-top:8px">“This permanently removes this space's Crystal Sprint save data. This cannot be undone.”<br>No silent deletion. Ever.</div>
+    </div>
+  </div>
+</div>`;
+
+S.s11 = `
+<div>
+  <div class="kicker">EXPERIMENTS · DESIGN</div>
+  <h2>Saved recipes, <span class="mint">calm motion</span></h2>
+  <div class="row">
+    <div class="card">
+      <div class="tag mint">SAVED EXPERIMENTS</div>
+      <div class="mono" style="font-size:27px;line-height:2.1;color:#D7DEE9">
+        “crystals run” &nbsp; I32 · exact &nbsp; <span class="mint">▶ run</span><br>
+        “energy watch” &nbsp; F32 · unknown &nbsp; <span class="mint">▶ run</span><br>
+        <span style="color:#5A6577">export & share as JSON</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">AURORA PRECISION</div>
+      <div class="row" style="margin-top:16px;gap:20px">
+        <div style="width:64px;height:64px;border-radius:16px;background:#0B0D12;border:1px solid #2A3444"></div>
+        <div style="width:64px;height:64px;border-radius:16px;background:#65E3BE"></div>
+        <div style="width:64px;height:64px;border-radius:16px;background:#B5A1FF"></div>
+        <div style="width:64px;height:64px;border-radius:16px;background:#F0BF70"></div>
+        <div style="width:64px;height:64px;border-radius:16px;background:#FF8585"></div>
+      </div>
+      <div class="sub" style="font-size:24px;margin-top:22px">Dark, OLED and light themes.<br>A reduce-motion switch makes every aurora stand still.</div>
+    </div>
+  </div>
+</div>`;
+
+S.s12 = `
+<div>
+  <div class="kicker" style="color:#F0BF70">THE HONEST PART</div>
+  <h2>What works today —<br>and what doesn't</h2>
+  <div class="row">
+    <div class="card">
+      <span class="pill ok">SHIPPING</span>
+      <div class="sub" style="font-size:26px;margin-top:20px">Everything you just watched — against the included<br>cooperative training game, fully local, reproducible.</div>
+    </div>
+    <div class="card" style="border-color:rgba(240,191,112,.45)">
+      <span class="pill warn">EXPERIMENTAL — NOT IN THIS BUILD</span>
+      <div class="sub" style="font-size:26px;margin-top:20px">A true guest runtime for third-party games. It is the suite's<br>open research question — no shortcut launchers, no fake containers.</div>
+    </div>
+    <div class="card" style="border-color:rgba(255,133,133,.4)">
+      <span class="pill no">OUT OF SCOPE — FOREVER</span>
+      <div class="sub" style="font-size:26px;margin-top:20px">Online, competitive or server-authoritative games.<br>Anti-cheat evasion. Other players' sessions. Ever.</div>
+    </div>
+  </div>
+</div>`;
+
+S.s13 = `
+<div style="text-align:center;align-items:center">
+  <div style="display:flex;justify-content:center;gap:26px;margin-bottom:56px">
+    <div class="diamond m" style="margin:0"></div>
+    <div class="diamond v" style="margin:0"></div>
+  </div>
+  <h1 style="font-size:130px">Experiment <span class="mint">beautifully.</span></h1>
+  <div class="sub" style="margin:44px auto 0;text-align:center">
+    <b>github.com/siddhant-pardeshi/aetherplay-suite</b><br><br>
+    Source · paired APKs · hosted interactive tour · honest documentation<br>
+    <span style="color:#5A6577">MIT · fully local · no accounts · no telemetry</span>
+  </div>
+</div>`;
+
+const params = new URLSearchParams(location.search);
+const id = params.get('slide') || 's01';
+document.getElementById('content').innerHTML = S[id] || S.s01;
+const notes = {
+  s03: 'SCREEN CONTENT ILLUSTRATED — REAL FOOTAGE SECTIONS ARE MARKED LIVE APP',
+  s04: 'SPACE APP · SCREEN ILLUSTRATION FROM THE ACTUAL DESIGN SYSTEM',
+  s05: 'CRYSTAL SPRINT · SCREEN ILLUSTRATION FROM THE ACTUAL DESIGN SYSTEM',
+  s06: 'LAB APP · SCREEN ILLUSTRATION FROM THE ACTUAL DESIGN SYSTEM',
+  s13: 'AETHERPLAY SUITE · MIT © 2026 SIDDHANT PARDESHI'
+};
+if (notes[id]) document.getElementById('note').textContent = notes[id];
+</script>
+</body>
+</html>
