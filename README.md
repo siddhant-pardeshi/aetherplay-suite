@@ -92,7 +92,7 @@ Host sessions and keep saves apart.
 | Search · refine · read · preview · write · undo · freeze | ![shipping](https://img.shields.io/badge/shipping-65E3BE?style=flat-square) | Lab ↔ Crystal Sprint session |
 | Named spaces with separate saves | ![shipping](https://img.shields.io/badge/shipping-65E3BE?style=flat-square) | Space |
 | Signature-guarded paired bridge (AIDL, protocol 1.0) | ![shipping](https://img.shields.io/badge/shipping-65E3BE?style=flat-square) | Lab + Space |
-| Hosted interactive tour (labeled simulations) | ![shipping](https://img.shields.io/badge/shipping-65E3BE?style=flat-square) | [demo-web](demo-web/) |
+| Hosted interactive tour (labeled simulations) | ![shipping](https://img.shields.io/badge/shipping-65E3BE?style=flat-square) | [demo-web](docs/index.html) |
 | Guest runtime for third-party games | ![experimental](https://img.shields.io/badge/experimental-F0BF70?style=flat-square) | Not in this build — [why](docs/KNOWN_LIMITATIONS.md) |
 | Pattern / pointer search, scripts, floating overlay | ![planned](https://img.shields.io/badge/planned-A8B3C4?style=flat-square) | Roadmap |
 | Anti-cheat evasion / online-game tampering | ![out of scope](https://img.shields.io/badge/out%20of%20scope-FF8585?style=flat-square) | Never — [ethos](#-scope-and-ethos) |
