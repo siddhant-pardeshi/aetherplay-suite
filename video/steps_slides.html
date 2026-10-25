@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:1920px; height:1080px; overflow:hidden; }
+  body { font-family:'Segoe UI','SF Pro Display',system-ui,sans-serif; background:#0B0D12; color:#F2F5FA; }
+  .aurora { position:absolute; inset:0;
+    background:
+      radial-gradient(900px 700px at 12% 8%, rgba(101,227,190,.20), transparent 60%),
+      radial-gradient(1000px 800px at 88% 20%, rgba(181,161,255,.18), transparent 60%),
+      radial-gradient(1100px 800px at 50% 110%, rgba(62,201,196,.14), transparent 60%); }
+  .grid { position:absolute; inset:0; opacity:.5;
+    background-image:linear-gradient(rgba(42,52,68,.25) 1px, transparent 1px),
+                     linear-gradient(90deg, rgba(42,52,68,.25) 1px, transparent 1px);
+    background-size:64px 64px; }
+  .wrap { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:0 140px; }
+  .kicker { font-size:26px; letter-spacing:10px; color:#65E3BE; font-weight:600; margin-bottom:26px; }
+  h1 { font-size:104px; font-weight:700; line-height:1.06; letter-spacing:-2px; }
+  h2 { font-size:72px; font-weight:700; line-height:1.12; letter-spacing:-1px; margin-bottom:28px; }
+  .sub { font-size:32px; color:#A8B3C4; line-height:1.55; max-width:1280px; margin-top:28px; }
+  .bignum { position:absolute; top:70px; right:130px; font-size:200px; font-weight:800; color:rgba(101,227,190,.16); letter-spacing:-6px; }
+  .pill { display:inline-block; border-radius:999px; padding:10px 26px; font-size:24px; font-weight:600; margin-right:16px; }
+  .pill.ok { background:rgba(101,227,190,.14); color:#65E3BE; border:1px solid rgba(101,227,190,.45); }
+  .pill.warn { background:rgba(240,191,112,.12); color:#F0BF70; border:1px solid rgba(240,191,112,.45); }
+  .pill.no { background:rgba(255,133,133,.12); color:#FF8585; border:1px solid rgba(255,133,133,.45); }
+  .row { display:flex; gap:36px; margin-top:56px; }
+  .card { background:rgba(20,25,35,.85); border:1px solid rgba(42,52,68,.9); border-radius:24px; padding:38px 44px; flex:1; }
+  .card h3 { font-size:34px; margin-bottom:14px; }
+  .mono { font-family:Consolas,Menlo,monospace; }
+  .footer-brand { position:absolute; top:64px; left:140px; font-size:24px; letter-spacing:8px; color:#A8B3C4; font-weight:600; }
+</style>
+</head>
+<body>
+<div class="aurora"></div><div class="grid"></div>
+<div class="footer-brand">AETHERPLAY · FIRST EXPERIMENT</div>
+<div class="wrap" id="content"></div>
+<script>
+const S = {};
+S.st1 = `<div><div class="kicker">STEP-BY-STEP · RECORDED LIVE ON ANDROID 16</div><h1>Your first experiment,<br><span style="color:#65E3BE">step by step</span></h1>
+<div class="sub">Session → play → search → preview → commit → undo → freeze → stop.<br>Everything you'll see is the real build, running for real — no mockups.</div></div>`;
+S.st2 = `<div class="bignum">1</div><div class="kicker">STEP 1 · SETUP</div><h2>Install the pair</h2>
+<div class="sub mono" style="font-size:30px">adb install AetherPlay-Space-0.1.1-debug.apk<br>adb install AetherPlay-Lab-0.1.1-debug.apk</div>
+<div class="sub">Both apps must share a signer — the debug pair from one release already does.</div></div>`;
+S.st3 = `<div class="bignum">2</div><div class="kicker">STEP 2 · AETHERPLAY SPACE</div><h2>Start a session</h2>
+<div class="row"><div class="card"><h3 class="mono" style="color:#65E3BE">Session → Start session</h3>
+<div class="sub" style="margin-top:0">A foreground service begins · a notification with <b>Open game</b> and <b>Stop session</b> appears · the bridge wakes up for Lab.</div></div></div></div>`;
+S.st4 = `<div class="bignum">3</div><div class="kicker">STEP 3 · CRYSTAL SPRINT</div><h2>Play — and read the number</h2>
+<div class="sub">Drag the orb, catch crystals. The counter on screen is live game memory.<br><br>
+<span class="pill ok">FIXED IN 0.1.1</span> the game now pauses honestly in the background — values stay put while you work in Lab.</div></div>`;
+S.st5 = `<div class="bignum">4</div><div class="kicker">STEP 4 · AETHERPLAY LAB</div><h2>Search</h2>
+<div class="row">
+<div class="card"><h3>Exact</h3><div class="sub" style="margin-top:0">You know the number on screen — type it.</div></div>
+<div class="card"><h3>Range</h3><div class="sub" style="margin-top:0">You know roughly where it lives.</div></div>
+<div class="card"><h3>Unknown + refine</h3><div class="sub" style="margin-top:0">Play between refines; the set collapses.</div></div></div>
+<div class="sub"><span class="pill ok">FIXED IN 0.1.1</span> every result row now shows its real live value — no more “?” placeholders.</div></div>`;
+S.st6 = `<div class="bignum">5</div><div class="kicker">STEP 5 · PREVIEW → COMMIT → UNDO</div><h2>Change a value, safely</h2>
+<div class="row">
+<div class="card"><h3 class="mono">old → new</h3><div class="sub" style="margin-top:0">Preview first. Read-only addresses say so.</div></div>
+<div class="card"><h3>Commit</h3><div class="sub" style="margin-top:0">Journaled with time and both values.</div></div>
+<div class="card"><h3>Undo</h3><div class="sub" style="margin-top:0">Restores while the value is still yours.</div></div></div></div>`;
+S.st7 = `<div class="bignum">6</div><div class="kicker">STEP 6 · FREEZE</div><h2>Hold it — then let go</h2>
+<div class="sub">Freeze re-applies the value every 300 ms while the session lives.<br>
+Watch the game try to change it and fail. Stop the session — every freeze stops. Always.</div></div>`;
+S.st8 = `<div class="kicker" style="color:#F0BF70">THE HONEST PART</div><h2>What this is — and isn't</h2>
+<div class="row">
+<div class="card"><span class="pill ok">WORKS TODAY</span><div class="sub" style="margin-top:18px">Everything in this video — against the included cooperative training game.</div></div>
+<div class="card"><span class="pill warn">NOT IN THIS BUILD</span><div class="sub" style="margin-top:18px">Popular third-party games. That needs the experimental guest runtime — and this project will never fake that demo.</div></div>
+<div class="card"><span class="pill no">NEVER</span><div class="sub" style="margin-top:18px">Online, competitive, or server-authoritative games.</div></div></div></div>`;
+S.st9 = `<div style="text-align:center"><h1 style="font-size:120px">The whole loop. <span style="color:#65E3BE">For real.</span></h1>
+<div class="sub" style="margin:40px auto 0;text-align:center"><b>github.com/siddhant-pardeshi/aetherplay-suite</b><br>Source · paired APKs · tutorials with recovery paths · hosted tour<br>
+<span style="color:#5A6577">MIT · fully local · no accounts · no telemetry</span></div></div>`;
+const params = new URLSearchParams(location.search);
+const id = params.get('slide') || 'st1';
+document.getElementById('content').innerHTML = S[id] || S.st1;
+</script>
+</body>
+</html>

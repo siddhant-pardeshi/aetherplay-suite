@@ -64,6 +64,13 @@ Works today: the full Lab vertical slice against the training game, over an auth
 
 Related pages: [KNOWN_LIMITATIONS.md](KNOWN_LIMITATIONS.md), [COMPATIBILITY.md](COMPATIBILITY.md), [TROUBLESHOOTING.md](TROUBLESHOOTING.md).
 
+## v0.1.1 fixes (2026-10-26)
+
+- Crystal Sprint now pauses whenever its activity is not active (verified live: a watched value stayed frozen across 6+ seconds of background time; previously the game silently kept playing).
+- `stopSession` saves and detaches synchronously, so a fast process death can no longer lose game data.
+- Lab no longer flashes "No active session" during the first status poll (Home and Search show a neutral state instead).
+- Result rows for non-writable addresses show their real live value instead of "?" (readAt now serves any in-region address; writes remain restricted to the named fields).
+
 ## On-emulator validation (2026-10-26, before first publish)
 
 Verified end-to-end on an Android 16 (API 36, x86_64, WHPX-accelerated) emulator with paired debug builds:

@@ -162,8 +162,7 @@ class GameCore(private val saveFile: File?) {
             val offset: Int
             when {
                 address >= GameMemory.STATE_BASE &&
-                    address + size <= GameMemory.STATE_BASE + GameMemory.STATE_SIZE &&
-                    address >= GameMemory.STATE_BASE -> {
+                    address + size <= GameMemory.STATE_BASE + GameMemory.STATE_SIZE -> {
                     bytes = snapshotStateRegion()
                     offset = (address - GameMemory.STATE_BASE).toInt()
                 }
@@ -190,7 +189,6 @@ class GameCore(private val saveFile: File?) {
     }
 
     private fun writeBytesInto(address: Long, bytes: ByteArray, isWrite: Boolean): Boolean {
-        fun put(dst: ByteArray, offset: Int) { System.arraycopy(bytes, 0, dst, offset, bytes.size) }
         when (address) {
             GameMemory.ADDR_CRYSTALS -> if (bytes.size == 4) { if (isWrite) crystals = leInt(bytes).coerceAtLeast(0); return true }
             GameMemory.ADDR_ENERGY -> if (bytes.size == 4) { if (isWrite) energy = leFloat(bytes).coerceIn(0f, 100f); return true }

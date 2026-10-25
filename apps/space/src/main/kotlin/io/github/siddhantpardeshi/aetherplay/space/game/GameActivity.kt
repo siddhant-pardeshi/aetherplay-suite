@@ -100,7 +100,11 @@ private fun GameCanvas(core: GameCore) {
             val now = awaitFrame()
             val dt = (now - last) / 1_000_000_000f
             last = now
-            core.tick(dt)
+            // Pause the simulation whenever the game screen is not the active
+            // activity — otherwise a backgrounded task silently keeps playing.
+            if (core.state.value.activityActive) {
+                core.tick(dt)
+            }
         }
     }
 

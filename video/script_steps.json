@@ -1,0 +1,51 @@
+{
+  "title": "AetherPlay — First Experiment, Step by Step",
+  "voice": "Microsoft Zira Desktop, pitch +38%, rate -9% (soft young feminine tone)",
+  "segments": [
+    {
+      "id": "st01_intro",
+      "text": "This is AetherPlay's first experiment, step by step, on the real build — recorded live on an Android emulator. Follow along on your own phone.",
+      "slide": "st1"
+    },
+    {
+      "id": "st02_install",
+      "text": "Step one. Install the pair. AetherPlay Space and AetherPlay Lab must come from the same signer — grab both APKs from the release page and install them together.",
+      "slide": "st2"
+    },
+    {
+      "id": "st03_session",
+      "text": "Step two. Open Space, go to Session, and tap Start session. A foreground service begins, a notification appears with an Open Game button, and the bridge wakes up for Lab.",
+      "slide": "st3"
+    },
+    {
+      "id": "st04_play",
+      "text": "Step three. Open Crystal Sprint and catch some crystals by dragging the orb. The number on your screen is real game memory — that's what we'll search for. In this build, the game pauses honestly whenever it goes to the background, so your values stay put while you work.",
+      "slide": "st4"
+    },
+    {
+      "id": "st05_search",
+      "text": "Step four. Open Lab — it connects and shows the live session. Choose your value type, pick a search mode, and search. Tip: if you don't know the value, use an unknown-value search and let refinement find it — every row now shows its real live value.",
+      "slide": "st5"
+    },
+    {
+      "id": "st06_write",
+      "text": "Step five. Tap the result you care about. Type a new value, press Preview — you'll see old and new side by side, and read-only addresses say so — then Commit. Every write is journaled, and Undo restores it while the value is still yours.",
+      "slide": "st6"
+    },
+    {
+      "id": "st07_freeze",
+      "text": "Step six. Press Freeze in the detail sheet. The value is gently re-applied while the session lives — watch the game try to change it and fail. When you stop the session, every freeze stops. Always.",
+      "slide": "st7"
+    },
+    {
+      "id": "st08_scope",
+      "text": "One honest note: everything you just saw works against the included cooperative training game. Popular third-party games are not supported in this build — that needs the experimental guest runtime, and this project will never fake a demo of something that doesn't exist, or touch online and competitive games.",
+      "slide": "st8"
+    },
+    {
+      "id": "st09_outro",
+      "text": "That's the whole loop: session, play, search, preview, commit, undo, freeze, stop. Build it yourself from the repository, and read the tutorials for every recovery path. See you in the next experiment!",
+      "slide": "st9"
+    }
+  ]
+}

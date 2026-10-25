@@ -175,16 +175,16 @@ class SessionManager(private val context: Context) {
             publish()
             freezeJob?.cancel()
             freezeJob = null
-            scope.launch {
-                if (save) GameHost.core?.save()
-                GameHost.detach(save)
-                currentGameKey = null
-                currentSpaceKey = null
-                clearSessionData()
-                generation += 1
-                sessionState = SessionState.NONE
-                publish()
-            }
+            // Save and detach synchronously: a process death between a state
+            // flip and a deferred save must never lose game data.
+            if (save) GameHost.core?.save()
+            GameHost.detach(save)
+            currentGameKey = null
+            currentSpaceKey = null
+            clearSessionData()
+            generation += 1
+            sessionState = SessionState.NONE
+            publish()
         }
     }
 

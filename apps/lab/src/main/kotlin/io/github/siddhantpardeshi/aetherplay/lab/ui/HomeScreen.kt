@@ -125,7 +125,11 @@ fun HomeScreen(vm: LabViewModel, onOpenSearch: () -> Unit) {
                     Icon(IcCrystal, contentDescription = null, tint = accent.accent, modifier = Modifier.size(20.dp))
                     Spacer(Modifier.width(10.dp))
                     Text(
-                        if (session?.state == SessionState.RUNNING) "Crystal Sprint — live" else "No active session",
+                        when {
+                            session == null -> "Reading session status…"
+                            session?.state == SessionState.RUNNING -> "Crystal Sprint — live"
+                            else -> "No active session"
+                        },
                         style = MaterialTheme.typography.titleMedium,
                         color = palette.textPrimary,
                     )
@@ -134,7 +138,14 @@ fun HomeScreen(vm: LabViewModel, onOpenSearch: () -> Unit) {
                         Pill("Gen ${session?.generation ?: 0}", Tone.ACCENT)
                     }
                 }
-                if (session?.state == SessionState.RUNNING) {
+                if (session == null) {
+                    Spacer(Modifier.height(8.dp))
+                    Text(
+                        "One moment — checking the session state with AetherPlay Space.",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = palette.textSecondary,
+                    )
+                } else if (session?.state == SessionState.RUNNING) {
                     Spacer(Modifier.height(12.dp))
                     Row(horizontalArrangement = Arrangement.spacedBy(28.dp)) {
                         Column {

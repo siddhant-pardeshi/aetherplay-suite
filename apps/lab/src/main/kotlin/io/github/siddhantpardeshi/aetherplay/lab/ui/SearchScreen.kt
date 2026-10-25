@@ -77,6 +77,7 @@ fun SearchScreen(vm: LabViewModel) {
     }
 
     val running = session?.state == SessionState.RUNNING
+    val awaitingStatus = session == null
 
     LazyColumn(
         modifier = Modifier.fillMaxSize().background(palette.bg).padding(horizontal = 20.dp),
@@ -84,12 +85,20 @@ fun SearchScreen(vm: LabViewModel) {
     ) {
         item { Spacer(Modifier.height(6.dp)) }
 
-        if (!running) {
+        if (!running && !awaitingStatus) {
             item {
                 EmptyState(
                     icon = IcScan,
                     title = "No active session",
                     body = "AetherPlay Space needs to host a session first. Open Space, choose a space, and start the session — then searching becomes available here.",
+                )
+            }
+        } else if (awaitingStatus) {
+            item {
+                EmptyState(
+                    icon = IcScan,
+                    title = "Reading session status…",
+                    body = "One moment — Lab is checking the session state with AetherPlay Space.",
                 )
             }
         } else {
